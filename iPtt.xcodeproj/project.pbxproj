@@ -12,6 +12,7 @@
 		3AA9335924D092B60059F723 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AA9335824D092B60059F723 /* Assets.xcassets */; };
 		3AA9335C24D092B60059F723 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AA9335B24D092B60059F723 /* Preview Assets.xcassets */; };
 		3AA9335F24D092B60059F723 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AA9335D24D092B60059F723 /* Main.storyboard */; };
+		AF792A3921FC740E087EC4BF /* Pods_iPtt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D60AD554D7DCDA9DC9CE63 /* Pods_iPtt.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,9 @@
 		3AA9335E24D092B60059F723 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3AA9336024D092B60059F723 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AA9336124D092B60059F723 /* iPtt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iPtt.entitlements; sourceTree = "<group>"; };
+		4402AAABE654C192C3AFC2DC /* Pods-iPtt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iPtt.debug.xcconfig"; path = "Target Support Files/Pods-iPtt/Pods-iPtt.debug.xcconfig"; sourceTree = "<group>"; };
+		44710782458FD7BCF51752C7 /* Pods-iPtt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iPtt.release.xcconfig"; path = "Target Support Files/Pods-iPtt/Pods-iPtt.release.xcconfig"; sourceTree = "<group>"; };
+		B4D60AD554D7DCDA9DC9CE63 /* Pods_iPtt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iPtt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,17 +34,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF792A3921FC740E087EC4BF /* Pods_iPtt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		38E57C3C1687466938092070 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B4D60AD554D7DCDA9DC9CE63 /* Pods_iPtt.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		3AA9334824D092B50059F723 = {
 			isa = PBXGroup;
 			children = (
 				3AA9335324D092B50059F723 /* iPtt */,
 				3AA9335224D092B50059F723 /* Products */,
+				EA9A52485B8785ED5E83B0B6 /* Pods */,
+				38E57C3C1687466938092070 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,6 +89,16 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		EA9A52485B8785ED5E83B0B6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4402AAABE654C192C3AFC2DC /* Pods-iPtt.debug.xcconfig */,
+				44710782458FD7BCF51752C7 /* Pods-iPtt.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -81,9 +106,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3AA9336424D092B60059F723 /* Build configuration list for PBXNativeTarget "iPtt" */;
 			buildPhases = (
+				DF52DD6FC8E82286CB9635DF /* [CP] Check Pods Manifest.lock */,
 				3AA9334D24D092B50059F723 /* Sources */,
 				3AA9334E24D092B50059F723 /* Frameworks */,
 				3AA9334F24D092B50059F723 /* Resources */,
+				DFE55832D30FFEA75C6BF2F3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -139,6 +166,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DF52DD6FC8E82286CB9635DF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iPtt-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DFE55832D30FFEA75C6BF2F3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iPtt/Pods-iPtt-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iPtt/Pods-iPtt-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iPtt/Pods-iPtt-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3AA9334D24D092B50059F723 /* Sources */ = {
@@ -279,6 +348,7 @@
 		};
 		3AA9336524D092B60059F723 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4402AAABE654C192C3AFC2DC /* Pods-iPtt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = iPtt/iPtt.entitlements;
@@ -302,6 +372,7 @@
 		};
 		3AA9336624D092B60059F723 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44710782458FD7BCF51752C7 /* Pods-iPtt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = iPtt/iPtt.entitlements;
