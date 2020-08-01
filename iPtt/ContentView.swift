@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    let pttMgr = PttMgr()
     @State private var account = ""
     @State private var password = ""
     
@@ -33,7 +34,7 @@ struct ContentView: View {
     
     func onLoginClicked() {
         if !account.isEmpty && !password.isEmpty {
-//            pttMgr.login(account, password)
+            pttMgr.login(account, password)
         }
     }
 }

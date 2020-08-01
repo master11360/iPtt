@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A470DFB24D474BB00E5DA13 /* PttMgr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A470DFA24D474BB00E5DA13 /* PttMgr.swift */; };
 		3AA9335524D092B50059F723 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9335424D092B50059F723 /* AppDelegate.swift */; };
 		3AA9335724D092B50059F723 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA9335624D092B50059F723 /* ContentView.swift */; };
 		3AA9335924D092B60059F723 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3AA9335824D092B60059F723 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A470DFA24D474BB00E5DA13 /* PttMgr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PttMgr.swift; sourceTree = "<group>"; };
 		3AA9335124D092B50059F723 /* iPtt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPtt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AA9335424D092B50059F723 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3AA9335624D092B50059F723 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				3AA9336024D092B60059F723 /* Info.plist */,
 				3AA9336124D092B60059F723 /* iPtt.entitlements */,
 				3AA9335A24D092B60059F723 /* Preview Content */,
+				3A470DFA24D474BB00E5DA13 /* PttMgr.swift */,
 			);
 			path = iPtt;
 			sourceTree = "<group>";
@@ -95,7 +98,6 @@
 				4402AAABE654C192C3AFC2DC /* Pods-iPtt.debug.xcconfig */,
 				44710782458FD7BCF51752C7 /* Pods-iPtt.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -214,6 +216,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A470DFB24D474BB00E5DA13 /* PttMgr.swift in Sources */,
 				3AA9335724D092B50059F723 /* ContentView.swift in Sources */,
 				3AA9335524D092B50059F723 /* AppDelegate.swift in Sources */,
 			);
