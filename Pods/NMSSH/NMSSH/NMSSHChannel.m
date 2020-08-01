@@ -338,6 +338,7 @@
 
             if (!(rc >=0 || erc >= 0)) {
                 NMSSHLogVerbose(@"Return code of response %ld, error %ld", (long)rc, (long)erc);
+                [self.delegate channelReadEnd:self];
 
                 if (rc == LIBSSH2_ERROR_SOCKET_RECV || erc == LIBSSH2_ERROR_SOCKET_RECV) {
                     NMSSHLogVerbose(@"Error received, closing channel...");

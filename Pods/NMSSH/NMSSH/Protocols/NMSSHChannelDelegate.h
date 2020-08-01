@@ -48,4 +48,11 @@
  */
 - (void)channelShellDidClose:(nonnull NMSSHChannel *)channel;
 
+/**
+ Called when a channel end reading data on the socket.
+
+ @param channel The channel that read the message
+ */
+- (void)channelReadEnd:(nonnull NMSSHChannel *)channel;
+
 @end
