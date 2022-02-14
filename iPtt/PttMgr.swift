@@ -27,9 +27,10 @@ class PttMgr: NSObject {
         do {
             try session.channel.startShell()
         } catch {
-            print("error: \(error)")
+            print("[test] error: \(error)")
         }
-        print("shell started")
+        print("[test] shell started")
+        startLocalEventMonitor()
     }
     
     func login(_ account: String, _ password: String) {
@@ -44,19 +45,51 @@ class PttMgr: NSObject {
             do {
                 try session.channel.write(data)
             } catch {
-                print("input error: \(error)")
+                print("[test] input error: \(error)")
             }
         }
+    }
+    
+    func startLocalEventMonitor() {
+        NSEvent.addLocalMonitorForEvents(matching: [NSEvent.EventTypeMask.keyDown], handler: { event in
+            if let data = self.getCmdData(event) {
+                self.writeDataToSocket(data)
+            }
+            return nil
+        })
+    }
+    
+    private func writeDataToSocket(_ data: Data) {
+        do {
+            try self.session.channel.write(data)
+        } catch {
+            print("[test] input error: \(error)")
+        }
+    }
+    
+    func getCmdData(_ event: NSEvent) -> Data? {
+        guard let characters = event.characters else { return nil }
+        if characters.unicodeScalars.first == Unicode.Scalar(NSUpArrowFunctionKey) {
+            return Data([0x1B, 0x5B, 0x41])
+        } else if characters.unicodeScalars.first == Unicode.Scalar(NSDownArrowFunctionKey) {
+            return Data([0x1B, 0x5B, 0x42])
+        } else if characters.unicodeScalars.first == Unicode.Scalar(NSLeftArrowFunctionKey) {
+            return Data([0x1B, 0x5B, 0x44])
+        } else if characters.unicodeScalars.first == Unicode.Scalar(NSRightArrowFunctionKey) {
+            return Data([0x1B, 0x5B, 0x43])
+        }
+        return event.characters?.data(using: .utf8)
     }
 }
 
 extension PttMgr: NMSSHChannelDelegate {
     func channel(_ channel: NMSSHChannel, didReadRawData data: Data) {
-        print("data: \(data)")
+        let str = String(decoding: data, as: UTF8.self)
+        print("[test] data: \(str)")
     }
 
     func channel(_ channel: NMSSHChannel, didReadRawError error: Data) {
-        print("error: \(error)")
+        print("[test] error: \(error)")
     }
     
     func channelReadEnd(_ channel: NMSSHChannel) {
@@ -67,14 +100,14 @@ extension PttMgr: NMSSHChannelDelegate {
     }
     
     func channel(_ channel: NMSSHChannel, didReadData message: String) {
-        print("message: \(message)")
+        print("[test] message: \(message)")
     }
     
     func channel(_ channel: NMSSHChannel, didReadError error: String) {
-        print("error: \(error)")
+        print("[test] error: \(error)")
     }
     
     func channelShellDidClose(_ channel: NMSSHChannel) {
-        print("shell closed")
+        print("[test] shell closed")
     }
 }
