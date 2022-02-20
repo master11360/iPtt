@@ -67,7 +67,7 @@ class PttMgr: NSObject {
         }
     }
     
-    func getCmdData(_ event: NSEvent) -> Data? {
+    private func getCmdData(_ event: NSEvent) -> Data? {
         guard let characters = event.characters else { return nil }
         if characters.unicodeScalars.first == Unicode.Scalar(NSUpArrowFunctionKey) {
             return Data([0x1B, 0x5B, 0x41])
@@ -80,11 +80,20 @@ class PttMgr: NSObject {
         }
         return event.characters?.data(using: .utf8)
     }
+    
+    private func removeHttpResponseStringIfNeeded(_ str: String) -> String {
+        guard let firstNewlineIndex = str.firstIndex(where: { $0.isNewline }) else { return str }
+        let strBeforeFirstNewline = String(str[..<firstNewlineIndex])
+        guard strBeforeFirstNewline.lowercased().contains("http") else { return str }
+        return String(str[firstNewlineIndex...])
+    }
 }
 
 extension PttMgr: NMSSHChannelDelegate {
     func channel(_ channel: NMSSHChannel, didReadRawData data: Data) {
-        let str = String(decoding: data, as: UTF8.self)
+        var str = String(decoding: data, as: UTF8.self)
+        str = removeHttpResponseStringIfNeeded(str)
+        str = str.filter({ !$0.isNewline })
         print("[test] data: \(str)")
     }
 

@@ -74,12 +74,12 @@
 			children = (
 				3AA9335424D092B50059F723 /* AppDelegate.swift */,
 				3AA9335624D092B50059F723 /* ContentView.swift */,
+				3A470DFA24D474BB00E5DA13 /* PttMgr.swift */,
 				3AA9335824D092B60059F723 /* Assets.xcassets */,
 				3AA9335D24D092B60059F723 /* Main.storyboard */,
 				3AA9336024D092B60059F723 /* Info.plist */,
 				3AA9336124D092B60059F723 /* iPtt.entitlements */,
 				3AA9335A24D092B60059F723 /* Preview Content */,
-				3A470DFA24D474BB00E5DA13 /* PttMgr.swift */,
 			);
 			path = iPtt;
 			sourceTree = "<group>";
