@@ -7,11 +7,18 @@
 //
 
 import NMSSH
+import Combine
+
+class PageModel: ObservableObject {
+    @Published var curPage = ""
+}
 
 class PttMgr: NSObject {
     let host = "ptt.cc"
     let username = "bbsu"
-    var session: NMSSHSession
+    var pageModel = PageModel()
+    let ansiParser = AnsiParser()
+    private var session: NMSSHSession
     private var account = ""
     private var password = ""
     
@@ -92,9 +99,15 @@ class PttMgr: NSObject {
 extension PttMgr: NMSSHChannelDelegate {
     func channel(_ channel: NMSSHChannel, didReadRawData data: Data) {
         var str = String(decoding: data, as: UTF8.self)
+        ansiParser.parse(str)
+        if ansiParser.isNeedEraseScreen {
+            ansiParser.isNeedEraseScreen = false
+            pageModel.curPage = ""
+        }
         str = removeHttpResponseStringIfNeeded(str)
         str = str.filter({ !$0.isNewline })
-        print("[test] data: \(str)")
+        pageModel.curPage += ansiParser.curResponse
+        print("[testRaw] data: \(pageModel.curPage)")
     }
 
     func channel(_ channel: NMSSHChannel, didReadRawError error: Data) {
@@ -109,6 +122,11 @@ extension PttMgr: NMSSHChannelDelegate {
     }
     
     func channel(_ channel: NMSSHChannel, didReadData message: String) {
+//        var str = message
+//        str = removeHttpResponseStringIfNeeded(str)
+//        str = str.filter({ !$0.isNewline })
+//        str = ansiParser.parse(str)
+//        pageModel.curPage += str
         print("[test] message: \(message)")
     }
     
@@ -118,5 +136,14 @@ extension PttMgr: NMSSHChannelDelegate {
     
     func channelShellDidClose(_ channel: NMSSHChannel) {
         print("[test] shell closed")
+    }
+}
+
+
+extension Data {
+    var stringEncoding: String.Encoding? {
+        var nsString: NSString?
+        guard case let rawValue = NSString.stringEncoding(for: self, encodingOptions: nil, convertedString: &nsString, usedLossyConversion: nil), rawValue != 0 else { return nil }
+        return .init(rawValue: rawValue)
     }
 }

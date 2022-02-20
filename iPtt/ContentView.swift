@@ -15,20 +15,8 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            Text("Hello, World!")
+            Text(pttMgr.pageModel.curPage)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-            HStack {
-                TextField("Account", text: $account)
-                Button(action: onLoginClicked) {
-                    Text("Login")
-                }.hidden()
-            }
-            HStack {
-                SecureField("Password", text: $password)
-                Button(action: onLoginClicked) {
-                    Text("Login")
-                }
-            }
         }.padding()
     }
     
